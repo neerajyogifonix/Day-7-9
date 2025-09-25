@@ -87,7 +87,7 @@ function changeColor(color, delay) {
         resolve(`Color changed to ${color}`);
       }, delay);
     } else {
-      reject("Color not changed (Network issue)");
+      reject("Color not changed (Promise rejected)");
     }
   });
 }
@@ -185,7 +185,9 @@ notesList.addEventListener("click", (event) => {
 });
 
 // ---------------- DOM Traversal ----------------
-const addNoteButtonTraversal = document.getElementById("add-note-btn-traversal");
+const addNoteButtonTraversal = document.getElementById(
+  "add-note-btn-traversal"
+);
 const noteInputTraversal = document.getElementById("note-input-traversal");
 const notesListTraversal = document.getElementById("notes-list-traversal");
 
