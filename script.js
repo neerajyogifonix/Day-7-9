@@ -130,7 +130,7 @@ colorButton.addEventListener("click", () => {
 const logFetch = createLogger("output-fetch");
 
 // --------- Fetch / Axios Example ---------
-const url = "http://universities.hipolabs.com/search?country=";
+const url = "https://universities.hipolabs.com/search?country=";
 
 const countryInput = document.querySelector("#country-input");
 const fetchBtn = document.querySelector("#fetch-btn");
