@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced JavaScript Concepts - Notes</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>Advanced JavaScript Concepts - Demo Website</header>
+
+    <nav>
+      <a href="#debounce">Debounce/Throttle</a>
+      <a href="#async">Async/Await</a>
+      <a href="#fetch">Fetch/Axios</a>
+      <a href="#delegation">Event Delegation</a>
+      <a href="#traversal">DOM Traversal</a>
+      <a href="#currying">Currying</a>
+    </nav>
+
+    <main>
+      <!-- Debounce & Throttle -->
+      <section id="debounce">
+        <h2>Debouncing</h2>
+        <p class="explainer">
+          Debouncing ensures that a function (like searching) only runs after
+          the user stops typing for a certain time. This prevents unnecessary
+          calls, Load on server and improves performance.
+        </p>
+        <input
+          id="debouncingInput"
+          type="text"
+          placeholder="Type something..."
+        />
+
+        <h2>Throttling</h2>
+        <p class="explainer">
+          Throttling ensures that a function (like button clicks) runs at most
+          once in a given time period, even if the event is triggered many
+          times.
+        </p>
+        <input id="throttlingInput" type="button" value="Click Me" />
+
+        <div id="output-debounce" class="output-panel"></div>
+      </section>
+
+      <!-- Currying -->
+      <section id="currying">
+        <h2>Currying</h2>
+        <p class="explainer">
+          Currying transforms a function with multiple arguments into a sequence
+          of single-argument functions. This helps with reusability and creating
+          specialized functions.
+        </p>
+        <div id="output-currying" class="output-panel"></div>
+      </section>
+
+      <!-- Callback, Promises, Async Await -->
+      <section id="async">
+        <h2>Color Changing (Callbacks, Promises, Async Await)</h2>
+        
+        <p class="explainer">
+          Here we demonstrate asynchronous programming. The color of the heading
+          changes step by step using Promises and <code>async/await</code>. If
+          something fails, errors are caught and handled properly. Also the
+          finally block executes everytime.
+        </p>
+        <h1 id="color-heading">Watch my color change &nbsp; &nbsp; &nbsp; <button id="color-btn">Change</button></h1> 
+        <div id="output-async" class="output-panel"></div>
+      </section>
+
+      <!-- Fetch / Axios -->
+      <section id="fetch">
+        <h2>Fetch / Axios - Demo</h2>
+        <p class="explainer">
+          Fetch and Axios are both used to make HTTP requests to servers. Axios
+          provides automatic JSON parsing and better error handling, but Fetch
+          is built into modern browsers. Here, we fetch a list of universities
+          by country name.
+        </p>
+        <input
+          type="text"
+          id="country-input"
+          placeholder="Enter country name | Eg: Canada"
+          style="width: 300px;"
+        />
+        <button id="fetch-btn">Search</button>
+        <ul id="university-list"></ul>
+        <div id="output-fetch" class="output-panel"></div>
+      </section>
+
+      <!-- Event Delegation -->
+      <section id="delegation">
+        <h2>Event Delegation - Demo App</h2>
+        <p class="explainer">
+          Instead of adding click listeners to each button individually, I
+          attach a single listener to the parent. This is called Event
+          Delegation and it improves performance and reduces code duplication.
+        </p>
+        <input type="text" id="note-input" placeholder="Add a note" />
+        <button id="add-note-btn">Add Note</button>
+        <div id="notes-list"></div>
+        <p>Click on "Delete" to remove a note</p>
+        <div id="output-delegation" class="output-panel"></div>
+      </section>
+
+      <!-- DOM Traversal -->
+      <section id="traversal">
+        <h2>DOM Traversal - Demo App</h2>
+        <p class="explainer">
+          DOM Traversal lets us navigate through parent, child, and sibling
+          elements programmatically. Here, notes are added and removed while
+          logging their contents every few seconds.
+        </p>
+        <input type="text" id="note-input-traversal" placeholder="Add a note" />
+        <button id="add-note-btn-traversal">Add Note</button>
+        <div id="notes-list-traversal"></div>
+        <div id="output-traversal" class="output-panel"></div>
+      </section>
+
+      
+    </main>
+
+    <!-- <footer>JavaScript Advanced Concepts !!</footer> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
