@@ -1,8 +1,7 @@
-import { debounce, throttle } from "./utility.js"; 
+import { debounce, throttle } from "./utility.js";
 
 // --------- Utility Logger ---------
 function createLogger(outputId) {
-   
   const panel = document.getElementById(outputId); // Clouser
 
   return (...args) => {
@@ -124,13 +123,13 @@ async function changeColorExecuter() {
 
 colorButton.addEventListener("click", () => {
   changeColorExecuter();
-})
+});
 
 // --------- Logger for Fetch Section ---------
 const logFetch = createLogger("output-fetch");
 
 // --------- Fetch / Axios Example ---------
-const url = "https://universities.hipolabs.com/search?country=";
+const url = "http://universities.hipolabs.com/search?country=";
 
 const countryInput = document.querySelector("#country-input");
 const fetchBtn = document.querySelector("#fetch-btn");
@@ -147,12 +146,12 @@ fetchBtn.addEventListener("click", async () => {
 
   try {
     // Using Axios
-    const response = await axios.get(url + country);
+    let proxyURL = url + encodeURIComponent(`http://universities.hipolabs.com/search?country=${country}`);
+    const response = await axios.get(proxyURL);
     const data = response.data;
 
     logFetch("✅ Data received:", data.length, "universities");
     renderUniversities(data);
-
   } catch (e) {
     logFetch("❌ Error fetching data:", e.message);
   }
@@ -168,7 +167,6 @@ function renderUniversities(data) {
     logFetch("🏫 University:", uni.name);
   });
 }
-
 
 // ---------------- Event Delegation ----------------
 const addNoteButton = document.getElementById("add-note-btn");
@@ -206,7 +204,9 @@ notesList.addEventListener("click", (event) => {
 });
 
 // ---------------- DOM Traversal ----------------
-const addNoteButtonTraversal = document.getElementById("add-note-btn-traversal");
+const addNoteButtonTraversal = document.getElementById(
+  "add-note-btn-traversal"
+);
 const noteInputTraversal = document.getElementById("note-input-traversal");
 const notesListTraversal = document.getElementById("notes-list-traversal");
 
