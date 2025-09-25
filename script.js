@@ -2,8 +2,7 @@ import { debounce, throttle } from "./utility.js";
 
 // --------- Utility Logger ---------
 function createLogger(outputId) {
-  const panel = document.getElementById(outputId); // Clouser
-
+  const panel = document.getElementById(outputId); // Closure
   return (...args) => {
     const msg = args.join(" ");
     const line = document.createElement("div");
@@ -22,6 +21,7 @@ const logCurrying = createLogger("output-currying");
 const logAsync = createLogger("output-async");
 const logDelegation = createLogger("output-delegation");
 const logTraversal = createLogger("output-traversal");
+const logFetch = createLogger("output-fetch");
 
 // ---------------- Spread, Rest , Destructuring ----------------
 let arr = [2, 5, 6, 8, 7, 9];
@@ -92,20 +92,6 @@ function changeColor(color, delay) {
   });
 }
 
-// (async function changeColorExecuter() {
-//   try {
-//     logAsync(await changeColor("yellow", 1000));
-//     logAsync(await changeColor("pink", 1000));
-//     logAsync(await changeColor("green", 1000));
-//     logAsync(await changeColor("purple", 1000));
-//     logAsync(await changeColor("cyan", 1000));
-//   } catch (e) {
-//     logAsync("Error caught:", e);
-//   } finally {
-//     logAsync("Finally block executed.");
-//   }
-// })();
-
 async function changeColorExecuter() {
   try {
     logAsync(await changeColor("yellow", 1000));
@@ -125,17 +111,11 @@ colorButton.addEventListener("click", () => {
   changeColorExecuter();
 });
 
-// --------- Logger for Fetch Section ---------
-const logFetch = createLogger("output-fetch");
-
-// --------- Fetch / Axios Example ---------
-const url = "http://universities.hipolabs.com/search?country=";
-
+// ---------------- Fetch / Axios Section ----------------
 const countryInput = document.querySelector("#country-input");
 const fetchBtn = document.querySelector("#fetch-btn");
 const universityList = document.querySelector("#university-list");
 
-// Fetch button click
 fetchBtn.addEventListener("click", async () => {
   const country = countryInput.value.trim();
   if (!country) {
@@ -145,10 +125,12 @@ fetchBtn.addEventListener("click", async () => {
   logFetch("🔍 Searching universities for:", country);
 
   try {
-    // Using Axios
-    let proxyURL = url + encodeURIComponent(`http://universities.hipolabs.com/search?country=${country}`);
+    // Using AllOrigins proxy to bypass HTTPS issue
+    const proxyURL = `https://api.allorigins.win/get?url=${encodeURIComponent(
+      `http://universities.hipolabs.com/search?country=${country}`
+    )}`;
     const response = await axios.get(proxyURL);
-    const data = response.data;
+    const data = JSON.parse(response.data.contents);
 
     logFetch("✅ Data received:", data.length, "universities");
     renderUniversities(data);
@@ -157,7 +139,6 @@ fetchBtn.addEventListener("click", async () => {
   }
 });
 
-// Render list
 function renderUniversities(data) {
   universityList.innerHTML = ""; // clear old data
   data.forEach((uni, index) => {
@@ -204,9 +185,7 @@ notesList.addEventListener("click", (event) => {
 });
 
 // ---------------- DOM Traversal ----------------
-const addNoteButtonTraversal = document.getElementById(
-  "add-note-btn-traversal"
-);
+const addNoteButtonTraversal = document.getElementById("add-note-btn-traversal");
 const noteInputTraversal = document.getElementById("note-input-traversal");
 const notesListTraversal = document.getElementById("notes-list-traversal");
 
